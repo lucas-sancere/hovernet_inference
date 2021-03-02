@@ -693,6 +693,11 @@ class InferWSI(object):
                 tile_tl[0]: tile_br[0], tile_tl[1]: tile_br[1]
             ]
             roi_inst = np.copy(roi_inst)
+
+            # perform shape align `pred_inst` and `roi_inst`,
+            # misalignment can only occur at the right and bottom of the wsi
+            pred_inst = pred_inst[:roi_inst.shape[0], roi_inst.shape[1]]
+
             roi_edge = np.concatenate(
                 [roi_inst[[0, -1], :].flatten(), roi_inst[:, [0, -1]].flatten()]
             )
