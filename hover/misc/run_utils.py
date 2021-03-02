@@ -66,13 +66,21 @@ def assemble_and_flush(wsi_pred_map_mmap_path, tile_info, factor_40_base, patch_
         return
 
     for pinfo in patch_output_list:
-        pcoord, pdata = pinfo
-        pdata = np.squeeze(pdata)
-        pcoord = np.squeeze(pcoord)[:2]
-        tile_pred_map[
-            pcoord[0] : pcoord[0] + pdata.shape[0],
-            pcoord[1] : pcoord[1] + pdata.shape[1],
-        ] = pdata
+        # HACK FIX for Saad crashing problem of not being able to broadcast input array
+        # into target variable, likely due to bad shape management the upper level,
+        # current fix is to simply ignore these crashes, unknown how would this reflect on
+        # the final prediction map. If want a better fix, do it a higher level, because the
+        # direction of the missing portion is unknown (missing left/right/top/bottom)
+        try:
+            pcoord, pdata = pinfo
+            pdata = np.squeeze(pdata)
+            pcoord = np.squeeze(pcoord)[:2]
+            tile_pred_map[
+                pcoord[0] : pcoord[0] + pdata.shape[0],
+                pcoord[1] : pcoord[1] + pdata.shape[1],
+            ] = pdata
+        except:
+            pass
     return
 
 
