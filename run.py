@@ -297,7 +297,6 @@ class InferWSI(object):
         self.input_norm = True  
         self.wsi_proc_lvl = 0  
         self.ambiguous_size = 128  
-        self.wsi_inst_info = {}
 
         self.input_tensor_names = ["images"]
         self.output_tensor_names = ["predmap-coded"]
@@ -563,6 +562,8 @@ class InferWSI(object):
             filename: WSI path to process
 
         """
+        self.wsi_inst_info = {} # must be reinitialize every run!
+
         self.full_filename = self.input_dir + "/" + filename
         print(self.full_filename)
         self.load_wsi(self.full_filename)
