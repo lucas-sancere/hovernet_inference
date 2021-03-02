@@ -696,7 +696,7 @@ class InferWSI(object):
 
             # perform shape align `pred_inst` and `roi_inst`,
             # misalignment can only occur at the right and bottom of the wsi
-            pred_inst = pred_inst[:roi_inst.shape[0], roi_inst.shape[1]]
+            pred_inst = pred_inst[:roi_inst.shape[0], :roi_inst.shape[1]]
 
             roi_edge = np.concatenate(
                 [roi_inst[[0, -1], :].flatten(), roi_inst[:, [0, -1]].flatten()]
