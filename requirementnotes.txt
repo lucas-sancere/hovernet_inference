@@ -1,0 +1,20 @@
+Change of requirement from original files:
+
+Error with openslide-python==1.1.1.
+When pip install, error config message (need to reproduce the error to put it here) then I downloaded 1.1.2.
+
+Error with tensorflow-gpu==1.12.0
+ImportError: libcublas.so.9.0: cannot open shared object file: No such file or directory
+Check the issue on GitHub tensorflow:
+https://github.com/tensorflow/tensorflow/issues/15604
+Do: 
+conda install -c anaconda cudatoolkit=9.0 cudnn=7
+
+As indicated in the github README, have to do:
+conda install -c conda-forge openjpeg
+
+Also to add:
+pip install requests
+conda install -c conda-forge openslide
+conda install -c bioconda openslide-python
+( conda upgrade libpng ? - to see whith last issue) 

@@ -1,0 +1,3 @@
+
+realmonusac.npz are the weights for the model trained on monusac dataset
+monusac.npz are the weights for the model trained on consep dataset (easier for the code use for now)
